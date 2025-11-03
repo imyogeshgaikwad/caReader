@@ -13,8 +13,8 @@ const listingSchema = new Schema({
     },
     image:{
         type:String,
-        default:"https://images.unsplash.com/photo-1703098669280-b2e154c234b7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TUclMjBjYXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=1000",
-        set:(v) => v==="" ?"https://images.unsplash.com/photo-1703098669280-b2e154c234b7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TUclMjBjYXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=1000" : v
+        default:"https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+        set:(v) => v==="" ?"https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" : v
 
     },
     price:{

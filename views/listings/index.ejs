@@ -2,10 +2,19 @@
 <body>
     <h3> All Cars</h3>
   
+    <% for (let listing of allListings){%>
+    <div class="card" style="width: 18rem;">
+  <img src="<%=listing.image%>" class="card-img-top" alt="car_image">
+  <div class="card-body">
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+  </div>
+</div>
+<%}%> 
+
     <ul>
 <% for (let listing of allListings){%>
     <li><a href="/listings/<%=listing._id %>"><%= listing.title %></a></li>
-<%}%> 
+<%}%>
 </ul>
    
 </body>
