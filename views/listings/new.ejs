@@ -6,16 +6,33 @@
     <title>CAREADER</title>
 </head>
 <body>
-    <h3>Create a new car deatils</h3>
+    <h3>Add a new car</h3>
     <form method="POST" action="/listings">
-        <input name="listing[title]" placeholder ="enter title">
-        <br><br> <textarea name="listing[description]" placeholder ="Type description"></textarea> 
-        <br><br><input name="listing[image]" placeholder ="URL">
-        <br><br> <input name="listing[price]" placeholder ="enter price">
-        <br><br> <input name="listing[location]" placeholder ="enter location">
-        <br><br> <input name="listing[country]" placeholder ="enter country">
+        <label for="title">Title:</label><br>
+        <input id="title" name="listing[title]" placeholder="Enter title" type="text" required>
         <br><br>
-<button>ADD</button>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="listing[description]" placeholder="Type description" required></textarea>
+        <br><br>
+
+        <label for="image">Image URL:</label><br>
+        <input id="image" name="listing[image]" placeholder="URL" type="text" required>
+        <br><br>
+
+        <label for="price">Price:</label><br>
+        <input id="price" name="listing[price]" placeholder="Enter price" type="number" required>
+        <br><br>
+
+        <label for="location">Location:</label><br>
+        <input id="location" name="listing[location]" placeholder="Enter location" type="text" required>
+        <br><br>
+
+        <label for="country">Country:</label><br>
+        <input id="country" name="listing[country]" placeholder="Enter country" type="text" required>
+        <br><br>
+
+        <button type="submit">Add</button>
     </form>
 </body>
 </html>
