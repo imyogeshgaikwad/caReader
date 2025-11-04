@@ -1,14 +1,42 @@
 <footer>
-    <div class="f-info fixed-bottom">
-        <div class="f-info-socials ">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-solid fa-envelope"></i>
-        </div>
-        <div class="f-info-brand"> &copy;CAREADER PRIVATE LIMITED</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy</a>
-            <a href="terms">Terms</a>
+    <div class="f-info bg-light border-top">
+        <div class="container-fluid py-3">
+            <div class="row align-items-center">
+                <!-- Social Links -->
+                <div class="col-md-4 text-center text-md-start mb-2 mb-md-0">
+                    <div class="f-info-socials">
+                        <a href="#" class="text-dark me-3" aria-label="Facebook">
+                            <i class="fa-brands fa-square-facebook fa-lg"></i>
+                        </a>
+                        <a href="#" class="text-dark me-3" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="mailto:info@careader.com" class="text-dark" aria-label="Email">
+                            <i class="fa-solid fa-envelope fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Brand -->
+                <div class="col-md-4 text-center mb-2 mb-md-0">
+                    <div class="f-info-brand small text-muted">
+                        &copy; <span id="year"></span> CAREADER PRIVATE LIMITED
+                    </div>
+                </div>
+                
+                <!-- Links -->
+                <div class="col-md-4 text-center text-md-end">
+                    <div class="f-info-links">
+                        <a href="/privacy" class="text-dark text-decoration-none me-3">Privacy</a>
+                        <a href="/terms" class="text-dark text-decoration-none">Terms</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </footer>
+
+<script>
+    // Auto-update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>

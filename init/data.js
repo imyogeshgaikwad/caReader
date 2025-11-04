@@ -3,7 +3,7 @@ const sampleListing =
   {
     "title": "Tesla Model 3",
     "description": "A sleek and efficient electric sedan with cutting-edge technology and autopilot features.",
-    "image": "https://images.unsplash.com/photo-1648542536766-2ae3591f0b88?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+    "image": "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
     "price": 45000,
     "location": "Dublin",
     "country": "Ireland"
@@ -11,7 +11,7 @@ const sampleListing =
   {
     "title": "BMW X5",
     "description": "Luxury SUV offering premium comfort, powerful performance, and advanced safety systems.",
-    "image": "https://images.unsplash.com/photo-1633169571852-2357d28ed1ff?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+    "image": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
     "price": 67000,
     "location": "Cork",
     "country": "Ireland"

@@ -1,32 +1,51 @@
 <% layout("/layouts/boilerplate") %>
 
 <body>
-    <h3>Add a new car</h3>
-    <form method="POST" action="/listings">
-        <label for="title">Title:</label><br>
-        <input id="title" name="listing[title]" placeholder="Enter title" type="text" required>
-        <br><br>
+  <section style="max-width: 600px; margin: 40px auto; padding: 30px; background: #f9fafb; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
+    <h2 style="text-align: center; color: #333;">🚗 Add a New Car</h2>
+    <form method="POST" action="/listings" style="margin-top: 25px; display: flex; flex-direction: column; gap: 15px;">
+      
+      <div>
+        <label for="title" style="font-weight: 600;">Title:</label>
+        <input id="title" name="listing[title]" type="text" placeholder="Enter title" required
+               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+      </div>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="listing[description]" placeholder="Type description" required></textarea>
-        <br><br>
+      <div>
+        <label for="description" style="font-weight: 600;">Description:</label>
+        <textarea id="description" name="listing[description]" rows="4" placeholder="Type description" required
+                  style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;"></textarea>
+      </div>
 
-        <label for="image">Image URL:</label><br>
-        <input id="image" name="listing[image]" placeholder="URL" type="text" required>
-        <br><br>
+      <div>
+        <label for="image" style="font-weight: 600;">Image URL:</label>
+        <input id="image" name="listing[image]" type="url" placeholder="Enter image URL" required
+               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+      </div>
 
-        <label for="price">Price:</label><br>
-        <input id="price" name="listing[price]" placeholder="Enter price" type="number" required>
-        <br><br>
+      <div>
+        <label for="price" style="font-weight: 600;">Price:</label>
+        <input id="price" name="listing[price]" type="number" placeholder="Enter price" min="0" required
+               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+      </div>
 
-        <label for="location">Location:</label><br>
-        <input id="location" name="listing[location]" placeholder="Enter location" type="text" required>
-        <br><br>
+      <div>
+        <label for="location" style="font-weight: 600;">Location:</label>
+        <input id="location" name="listing[location]" type="text" placeholder="Enter location" required
+               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+      </div>
 
-        <label for="country">Country:</label><br>
-        <input id="country" name="listing[country]" placeholder="Enter country" type="text" required>
-        <br><br>
+      <div>
+        <label for="country" style="font-weight: 600;">Country:</label>
+        <input id="country" name="listing[country]" type="text" placeholder="Enter country" required
+               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+      </div>
 
-        <button type="submit">Add</button>
+      <button type="submit"
+              style="background-color: #2563eb; color: white; font-weight: bold; padding: 12px; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s;">
+        Add Car
+      </button>
+
     </form>
+  </section>
 </body>

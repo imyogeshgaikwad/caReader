@@ -1,14 +1,36 @@
-<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><i class="fa-solid fa-car text-danger"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+    <!-- Brand with text -->
+    <a class="navbar-brand fw-bold" href="/">
+      <i class="fa-solid fa-car text-danger"></i>
+      <span class="ms-1">CAREADER</span>
+    </a>
+    
+    <!-- Hamburger Toggle -->
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
+    
+    <!-- Nav Links -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active"  href="/">Home</a>
-        <a class="nav-link" href="/listings">ALL CARS </a>
-        <a class="nav-link" href="/listings/new">ADD NEW CAR</a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a class="nav-link" href="/listings">
+          <i class="fa-solid fa-list"></i> All Cars
+        </a>
+        <a class="nav-link" href="/listings/new">
+          <i class="fa-solid fa-plus-circle"></i> Add New Car
+        </a>
       </div>
     </div>
   </div>

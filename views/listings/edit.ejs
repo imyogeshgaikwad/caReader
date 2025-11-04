@@ -1,33 +1,396 @@
 <% layout("/layouts/boilerplate") %>
 
-<body>
-    <h3>Update Car Details</h3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
-        <label for="title">Title:</label><br>
-        <input id="title" name="listing[title]" type="text" value="<%= listing.title %>" required>
-        <br><br>
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Card Container -->
+      <div class="card shadow-sm">
+        <div class="card-header bg-warning">
+          <h4 class="mb-0">
+            <i class="fa-solid fa-pen-to-square"></i> Update Car Details
+          </h4>
+        </div>
+        
+        <div class="card-body">
+          <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate>
+            
+            <!-- Title -->
+            <div class="mb-3">
+              <label for="title" class="form-label fw-bold">
+                Title <span class="text-danger">*</span>
+              </label>
+              <input 
+                id="title" 
+                name="listing[title]" 
+                class="form-control" 
+                type="text" 
+                value="<%= listing.title %>" 
+                placeholder="e.g., Tesla Model 3"
+                required
+                minlength="3"
+                maxlength="100"
+              >
+              <div class="invalid-feedback">
+                Please enter a title (3-100 characters).
+              </div>
+            </div>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="listing[description]" required><%= listing.description %></textarea>
-        <br><br>
+            <!-- Description -->
+            <div class="mb-3">
+              <label for="description" class="form-label fw-bold">
+                Description <span class="text-danger">*</span>
+              </label>
+              <textarea 
+                id="description" 
+                name="listing[description]" 
+                class="form-control" 
+                rows="4"
+                placeholder="Describe the car's features, condition, etc."
+                required
+                minlength="10"
+              ><%= listing.description %></textarea>
+              <div class="invalid-feedback">
+                Please provide a description (at least 10 characters).
+              </div>
+              <div class="form-text">
+                <span id="charCount">0</span> characters
+              </div>
+            </div>
 
-        <label for="image">Image URL:</label><br>
-        <input id="image" name="listing[image]" type="text" value="<%= listing.image %>" required>
-        <br><br>
+            <!-- Image URL with Preview -->
+            <div class="mb-3">
+              <label for="image" class="form-label fw-bold">
+                Image URL
+              </label>
+              <input 
+                id="image" 
+                name="listing[image]" 
+                class="form-control" 
+                type="url" 
+                value="<%= listing.image %>"
+                placeholder="https://example.com/car-image.jpg"
+              >
+              <div class="form-text">
+                Optional - Leave blank for default image
+              </div>
+              
+              <!-- Image Preview -->
+              <div class="mt-3" id="previewContainer"></div>
+                <label class="form-label fw-bold small text-muted">Preview:</label>
+                <div class="position-relative d-inline-flex">
+                  <img 
+                    id="imagePreview" 
+                    src="<%= listing.image %>" 
+                    alt="Preview" 
+                    class="img-thumbnail d-block" 
+                    style="max-height: 200px; max-width: 100%;"
+                  >
+                  <span 
+                    id="imageError" 
+                    class="badge bg-danger position-absolute top-0 start-50 translate-middle-x mt-2" 
+                    style="display: none;"
+                  >
+                    Invalid Image URL
+                  </span>
+                </div>
+              </div>
+            </div>
 
-        <label for="price">Price:</label><br>
-        <input id="price" name="listing[price]" type="number" value="<%= listing.price %>" required>
-        <br><br>
+            <!-- Price -->
+            <div class="mb-3">
+              <label for="price" class="form-label fw-bold">
+                Price (€) <span class="text-danger">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">€</span>
+                <input 
+                  id="price" 
+                  name="listing[price]" 
+                  class="form-control" 
+                  type="number" 
+                  value="<%= listing.price %>" 
+                  placeholder="45000"
+                  min="0"
+                  step="1"
+                  required
+                >
+              </div>
+              <div class="invalid-feedback">
+                Please enter a valid price (minimum €0).
+              </div>
+              <div class="form-text" id="priceFormatted"></div>
+            </div>
 
-        <label for="location">Location:</label><br>
-        <input id="location" name="listing[location]" type="text" value="<%= listing.location %>" required>
-        <br><br>
+            <!-- Location & Country (Side by Side) -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="location" class="form-label fw-bold">
+                  Location <span class="text-danger">*</span>
+                </label>
+                <input 
+                  id="location" 
+                  name="listing[location]" 
+                  class="form-control" 
+                  type="text" 
+                  value="<%= listing.location %>" 
+                  placeholder="e.g., Dublin"
+                  required
+                >
+                <div class="invalid-feedback">
+                  Please enter a location.
+                </div>
+              </div>
 
-        <label for="country">Country:</label><br>
-        <input id="country" name="listing[country]" type="text" value="<%= listing.country %>" required>
-        <br><br>
+              <div class="col-md-6 mb-3">
+                <label for="country" class="form-label fw-bold">
+                  Country <span class="text-danger">*</span>
+                </label>
+                <input 
+                  id="country" 
+                  name="listing[country]" 
+                  class="form-control" 
+                  type="text" 
+                  value="<%= listing.country %>" 
+                  placeholder="e.g., Ireland"
+                  required
+                >
+                <div class="invalid-feedback">
+                  Please enter a country.
+                </div>
+              </div>
+            </div>
 
-        <button type="submit">Update</button>
-    </form>
-</body>
+            <!-- Last Updated Info -->
+            <% if (listing.updatedAt) { %>
+              <div class="alert alert-info small mb-3">
+                <i class="fa-solid fa-clock"></i>
+                Last updated: <%= new Date(listing.updatedAt).toLocaleString('en-IE', { 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                }) %>
+              </div>
+            <% } %>
 
+            <!-- Submit Buttons -->
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-warning flex-fill">
+                <i class="fa-solid fa-save"></i> Update Car
+              </button>
+              <a href="/listings/<%= listing._id %>" class="btn btn-outline-secondary flex-fill">
+                <i class="fa-solid fa-times"></i> Cancel
+              </a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- Delete Section -->
+      <div class="card shadow-sm mt-3 border-danger">
+        <div class="card-body">
+          <h5 class="card-title text-danger mb-3">
+            <i class="fa-solid fa-triangle-exclamation"></i> Danger Zone
+          </h5>
+          <p class="card-text text-muted mb-3">
+            Once you delete this listing, it cannot be recovered. All information will be permanently removed.
+          </p>
+          <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" id="deleteForm">
+            <button 
+              type="button"
+              class="btn btn-danger" 
+              data-bs-toggle="modal" 
+              data-bs-target="#deleteModal"
+            >
+              <i class="fa-solid fa-trash"></i> Delete Listing
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteModalLabel">
+          <i class="fa-solid fa-triangle-exclamation"></i> Confirm Deletion
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-3">Are you absolutely sure you want to delete this listing?</p>
+        <div class="alert alert-warning">
+          <strong><%= listing.title %></strong><br>
+          <small class="text-muted">This action cannot be undone!</small>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fa-solid fa-times"></i> Cancel
+        </button>
+        <button type="button" class="btn btn-danger" id="confirmDelete">
+          <i class="fa-solid fa-trash"></i> Yes, Delete It
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script>
+  // Bootstrap form validation
+  (function() {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(function(form) {
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+
+  // Image preview on URL change
+  const imageInput = document.getElementById('image');
+  const imagePreview = document.getElementById('imagePreview');
+  const previewContainer = document.getElementById('previewContainer');
+  const imageError = document.getElementById('imageError');
+  
+  imageInput.addEventListener('input', function() {
+    const url = this.value.trim();
+    
+    if (url) {
+      previewContainer.style.display = 'block';
+      imagePreview.src = url;
+      imageError.style.display = 'none';
+      
+      imagePreview.onerror = function() {
+        imageError.style.display = 'block';
+      };
+      
+      imagePreview.onload = function() {
+        imageError.style.display = 'none';
+      };
+    } else {
+      previewContainer.style.display = 'none';
+      imageError.style.display = 'none';
+    }
+  });
+
+  // Character counter for description
+  const descriptionTextarea = document.getElementById('description');
+  const charCount = document.getElementById('charCount');
+  
+  function updateCharCount() {
+    const count = descriptionTextarea.value.length;
+    charCount.textContent = count;
+    
+    if (count < 10) {
+      charCount.classList.add('text-danger');
+      charCount.classList.remove('text-success');
+    } else {
+      charCount.classList.add('text-success');
+      charCount.classList.remove('text-danger');
+    }
+  }
+  
+  descriptionTextarea.addEventListener('input', updateCharCount);
+  updateCharCount(); // Initialize on page load
+
+  // Price formatter
+  const priceInput = document.getElementById('price');
+  const priceFormatted = document.getElementById('priceFormatted');
+  
+  function formatPrice() {
+    const value = parseFloat(priceInput.value);
+    if (!isNaN(value) && value >= 0) {
+      priceFormatted.textContent = `Formatted: ${value.toLocaleString('de-DE', { 
+        style: 'currency', 
+        currency: 'EUR' 
+      })}`;
+      priceFormatted.classList.add('text-success');
+    } else {
+      priceFormatted.textContent = '';
+    }
+  }
+  
+  priceInput.addEventListener('input', formatPrice);
+  formatPrice(); // Initialize on page load
+
+  // Delete confirmation modal
+  const deleteModal = document.getElementById('deleteModal');
+  const confirmDeleteBtn = document.getElementById('confirmDelete');
+  const deleteForm = document.getElementById('deleteForm');
+  
+  confirmDeleteBtn.addEventListener('click', function() {
+    // Submit the delete form
+    deleteForm.submit();
+  });
+
+  // Prevent accidental navigation away
+  let formChanged = false;
+  const formInputs = document.querySelectorAll('input, textarea');
+  
+  formInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      formChanged = true;
+    });
+  });
+
+  window.addEventListener('beforeunload', function(e) {
+    if (formChanged) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+
+  // Reset flag when form is submitted
+  document.querySelector('form').addEventListener('submit', function() {
+    formChanged = false;
+  });
+</script>
+
+<style>
+  /* Smooth transitions */
+  .img-thumbnail {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .img-thumbnail:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Loading state for image */
+  #imagePreview {
+    background: #f8f9fa;
+  }
+  
+  /* Make invalid feedback more visible */
+  .was-validated .form-control:invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  }
+  
+  .was-validated .form-control:valid {
+    border-color: #198754;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  }
+</style>
