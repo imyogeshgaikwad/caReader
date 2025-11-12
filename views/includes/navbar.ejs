@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top shadow-sm">
   <div class="container-fluid">
-    <!-- Brand with text -->
+    <!-- Brand -->
     <a class="navbar-brand fw-bold" href="/">
       <i class="fa-solid fa-car text-danger"></i>
       <span class="ms-1">CAREADER</span>
     </a>
-    
-    <!-- Hamburger Toggle -->
-    <button 
-      class="navbar-toggler" 
-      type="button" 
-      data-bs-toggle="collapse" 
+
+    <!-- Hamburger -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup"
       aria-expanded="false"
@@ -18,10 +18,11 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <!-- Nav Links -->
+
+    <!-- Collapsible Nav -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ms-auto">
+      <!-- Left side: main links -->
+      <div class="navbar-nav me-auto">
         <a class="nav-link" href="/">
           <i class="fa-solid fa-house"></i> Home
         </a>
@@ -31,6 +32,22 @@
         <a class="nav-link" href="/listings/new">
           <i class="fa-solid fa-plus-circle"></i> Add New Car
         </a>
+      </div>
+
+      <!-- Right side: auth links -->
+      <div class="navbar-nav ms-auto">
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup">
+            <i class="fa-solid fa-user-plus"></i> Sign Up
+          </a>
+          <a class="nav-link" href="/login">
+            <i class="fa-solid fa-right-to-bracket"></i> Log In
+          </a>
+        <% } else { %>
+          <a class="nav-link" href="/logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </a>
+        <% } %>
       </div>
     </div>
   </div>
