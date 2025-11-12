@@ -29,6 +29,8 @@ router.post("/signup", wrapAsync(async (req, res, next) => {
     }
 }));
 
+//login
+
 router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
