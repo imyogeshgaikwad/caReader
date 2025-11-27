@@ -2,185 +2,155 @@
 
 <div class="container mt-5 mb-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
-      <!-- Card Container -->
-      <div class="card shadow-sm">
-        <div class="card-header bg-warning">
-          <h4 class="mb-0">
-            <i class="fa-solid fa-pen-to-square"></i> Update Car Details
+    <div class="col-lg-10 col-xl-8">
+      
+      <!-- Header -->
+      <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold mb-2">Edit Your Listing</h1>
+        <p class="text-muted fs-5">Update your car details to keep information current</p>
+      </div>
+
+      <!-- Main Edit Form Card -->
+      <div class="card border-0 shadow-lg mb-4" style="border-radius: 20px;">
+        <div class="card-header border-0 text-white p-4" 
+             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px 20px 0 0;">
+          <h4 class="mb-0 fw-bold">
+            <i class="bi bi-card-checklist me-2"></i>Listing Information
           </h4>
         </div>
         
-        <div class="card-body">
+        <div class="card-body p-4 p-md-5">
           <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate>
             
             <!-- Title -->
-            <div class="mb-3">
-              <label for="title" class="form-label fw-bold">
-                Title <span class="text-danger">*</span>
+            <div class="mb-4">
+              <label for="title" class="form-label fw-bold fs-5 mb-2">
+                <i class="bi bi-type text-primary me-2"></i>Title 
+                <span class="text-danger">*</span>
               </label>
-              <input 
-                id="title" 
-                name="listing[title]" 
-                class="form-control" 
-                type="text" 
-                value="<%= listing.title %>" 
-                placeholder="e.g., Tesla Model 3"
-                required
-                minlength="3"
-                maxlength="100"
-              >
-              <div class="invalid-feedback">
-                Please enter a title (3-100 characters).
+              <input id="title" name="listing[title]" class="form-control form-control-lg" 
+                     type="text" value="<%= listing.title %>" placeholder="e.g., Tesla Model 3 Performance"
+                     required minlength="3" maxlength="100" style="border-radius: 12px;">
+              <div class="invalid-feedback">Please enter a title (3-100 characters).</div>
+              <div class="form-text">Make it catchy and descriptive!</div>
+            </div>
+
+            <!-- Description with Character Counter -->
+            <div class="mb-4">
+              <label for="description" class="form-label fw-bold fs-5 mb-2">
+                <i class="bi bi-chat-left-text text-primary me-2"></i>Description 
+                <span class="text-danger">*</span>
+              </label>
+              <textarea id="description" name="listing[description]" class="form-control form-control-lg" 
+                        rows="6" placeholder="Describe the car's features, condition, mileage, service history, etc."
+                        required minlength="10" style="border-radius: 12px; resize: none;"><%= listing.description %></textarea>
+              <div class="invalid-feedback">Please provide a description (at least 10 characters).</div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="form-text">Be detailed to attract more buyers</div>
+                <div class="badge bg-secondary" id="charCount">0 characters</div>
               </div>
             </div>
 
-            <!-- Description -->
-            <div class="mb-3">
-              <label for="description" class="form-label fw-bold">
-                Description <span class="text-danger">*</span>
+            <!-- Image URL with Live Preview -->
+            <div class="mb-4">
+              <label for="image" class="form-label fw-bold fs-5 mb-2">
+                <i class="bi bi-image text-primary me-2"></i>Image URL
               </label>
-              <textarea 
-                id="description" 
-                name="listing[description]" 
-                class="form-control" 
-                rows="4"
-                placeholder="Describe the car's features, condition, etc."
-                required
-                minlength="10"
-              ><%= listing.description %></textarea>
-              <div class="invalid-feedback">
-                Please provide a description (at least 10 characters).
-              </div>
-              <div class="form-text">
-                <span id="charCount">0</span> characters
-              </div>
-            </div>
-
-            <!-- Image URL with Preview -->
-            <div class="mb-3">
-              <label for="image" class="form-label fw-bold">
-                Image URL
-              </label>
-              <input 
-                id="image" 
-                name="listing[image]" 
-                class="form-control" 
-                type="url" 
-                value="<%= listing.image %>"
-                placeholder="https://example.com/car-image.jpg"
-              >
-              <div class="form-text">
-                Optional - Leave blank for default image
-              </div>
+              <input id="image" name="listing[image]" class="form-control form-control-lg" 
+                     type="url" value="<%= listing.image %>" placeholder="https://example.com/car-image.jpg"
+                     style="border-radius: 12px;">
+              <div class="form-text mb-3">Optional - Leave blank for default image</div>
               
-              <!-- Image Preview -->
-              <div class="mt-3" id="previewContainer"></div>
-                <label class="form-label fw-bold small text-muted">Preview:</label>
-                <div class="position-relative d-inline-flex">
-                  <img 
-                    id="imagePreview" 
-                    src="<%= listing.image %>" 
-                    alt="Preview" 
-                    class="img-thumbnail d-block" 
-                    style="max-height: 200px; max-width: 100%;"
-                  >
-                  <span 
-                    id="imageError" 
-                    class="badge bg-danger position-absolute top-0 start-50 translate-middle-x mt-2" 
-                    style="display: none;"
-                  >
-                    Invalid Image URL
-                  </span>
+              <!-- Image Preview Card -->
+              <div class="card border-0 shadow-sm" style="border-radius: 12px; background: #f8f9fa;">
+                <div class="card-body p-3">
+                  <label class="form-label fw-semibold small text-muted mb-2">
+                    <i class="bi bi-eye me-1"></i>Live Preview
+                  </label>
+                  <div class="position-relative">
+                    <img id="imagePreview" src="<%= listing.image %>" alt="Preview" 
+                         class="img-fluid rounded shadow-sm" 
+                         style="max-height: 300px; width: 100%; object-fit: cover;">
+                    <div id="imageError" class="alert alert-danger position-absolute top-50 start-50 translate-middle shadow" 
+                         style="display: none; z-index: 10;">
+                      <i class="bi bi-exclamation-triangle-fill me-2"></i>Invalid Image URL
+                    </div>
+                    <div id="imageLoading" class="position-absolute top-50 start-50 translate-middle" style="display: none;">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Price -->
-            <div class="mb-3">
-              <label for="price" class="form-label fw-bold">
-                Price (€) <span class="text-danger">*</span>
+            <!-- Price with Visual Formatting -->
+            <div class="mb-4">
+              <label for="price" class="form-label fw-bold fs-5 mb-2">
+                <i class="bi bi-currency-euro text-success me-2"></i>Price 
+                <span class="text-danger">*</span>
               </label>
-              <div class="input-group">
-                <span class="input-group-text">€</span>
-                <input 
-                  id="price" 
-                  name="listing[price]" 
-                  class="form-control" 
-                  type="number" 
-                  value="<%= listing.price %>" 
-                  placeholder="45000"
-                  min="0"
-                  step="1"
-                  required
-                >
+              <div class="input-group input-group-lg" style="border-radius: 12px; overflow: hidden;">
+                <span class="input-group-text bg-success text-white fw-bold" 
+                      style="font-size: 1.2rem; border: none;">€</span>
+                <input id="price" name="listing[price]" class="form-control form-control-lg" 
+                       type="number" value="<%= listing.price %>" placeholder="45000"
+                       min="0" step="1" required style="border: 2px solid #dee2e6;">
               </div>
-              <div class="invalid-feedback">
-                Please enter a valid price (minimum €0).
+              <div class="invalid-feedback">Please enter a valid price (minimum €0).</div>
+              <div class="mt-2">
+                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2" id="priceFormatted"></span>
               </div>
-              <div class="form-text" id="priceFormatted"></div>
             </div>
 
-            <!-- Location & Country (Side by Side) -->
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="location" class="form-label fw-bold">
-                  Location <span class="text-danger">*</span>
+            <!-- Location & Country in Gradient Cards -->
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="location" class="form-label fw-bold fs-5 mb-2">
+                  <i class="bi bi-geo-alt text-danger me-2"></i>Location 
+                  <span class="text-danger">*</span>
                 </label>
-                <input 
-                  id="location" 
-                  name="listing[location]" 
-                  class="form-control" 
-                  type="text" 
-                  value="<%= listing.location %>" 
-                  placeholder="e.g., Dublin"
-                  required
-                >
-                <div class="invalid-feedback">
-                  Please enter a location.
-                </div>
+                <input id="location" name="listing[location]" class="form-control form-control-lg" 
+                       type="text" value="<%= listing.location %>" placeholder="e.g., Dublin"
+                       required style="border-radius: 12px;">
+                <div class="invalid-feedback">Please enter a location.</div>
               </div>
 
-              <div class="col-md-6 mb-3">
-                <label for="country" class="form-label fw-bold">
-                  Country <span class="text-danger">*</span>
+              <div class="col-md-6">
+                <label for="country" class="form-label fw-bold fs-5 mb-2">
+                  <i class="bi bi-flag text-primary me-2"></i>Country 
+                  <span class="text-danger">*</span>
                 </label>
-                <input 
-                  id="country" 
-                  name="listing[country]" 
-                  class="form-control" 
-                  type="text" 
-                  value="<%= listing.country %>" 
-                  placeholder="e.g., Ireland"
-                  required
-                >
-                <div class="invalid-feedback">
-                  Please enter a country.
-                </div>
+                <input id="country" name="listing[country]" class="form-control form-control-lg" 
+                       type="text" value="<%= listing.country %>" placeholder="e.g., Ireland"
+                       required style="border-radius: 12px;">
+                <div class="invalid-feedback">Please enter a country.</div>
               </div>
             </div>
 
             <!-- Last Updated Info -->
             <% if (listing.updatedAt) { %>
-              <div class="alert alert-info small mb-3">
-                <i class="fa-solid fa-clock"></i>
-                Last updated: <%= new Date(listing.updatedAt).toLocaleString('en-IE', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
+              <div class="alert alert-info border-0 shadow-sm mb-4" style="border-radius: 12px;">
+                <i class="bi bi-clock-history me-2"></i>
+                <strong>Last updated:</strong> 
+                <%= new Date(listing.updatedAt).toLocaleString('en-IE', { 
+                  year: 'numeric', month: 'long', day: 'numeric',
+                  hour: '2-digit', minute: '2-digit'
                 }) %>
               </div>
             <% } %>
 
-            <!-- Submit Buttons -->
-            <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-warning flex-fill">
-                <i class="fa-solid fa-save"></i> Update Car
+            <!-- Action Buttons -->
+            <div class="d-flex gap-3 flex-wrap">
+              <button type="submit" class="btn btn-lg flex-fill text-white rounded-pill shadow-sm" 
+                      style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-width: 200px;">
+                <i class="bi bi-check-circle me-2"></i>Save Changes
               </button>
-              <a href="/listings/<%= listing._id %>" class="btn btn-outline-secondary flex-fill">
-                <i class="fa-solid fa-times"></i> Cancel
+              <a href="/listings/<%= listing._id %>" 
+                 class="btn btn-outline-secondary btn-lg flex-fill rounded-pill" 
+                 style="min-width: 200px;">
+                <i class="bi bi-x-circle me-2"></i>Cancel
               </a>
             </div>
 
@@ -188,25 +158,26 @@
         </div>
       </div>
 
-      <!-- Delete Section -->
-      <div class="card shadow-sm mt-3 border-danger">
-        <div class="card-body">
-          <h5 class="card-title text-danger mb-3">
-            <i class="fa-solid fa-triangle-exclamation"></i> Danger Zone
-          </h5>
-          <p class="card-text text-muted mb-3">
-            Once you delete this listing, it cannot be recovered. All information will be permanently removed.
-          </p>
-          <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" id="deleteForm">
-            <button 
-              type="button"
-              class="btn btn-danger" 
-              data-bs-toggle="modal" 
-              data-bs-target="#deleteModal"
-            >
-              <i class="fa-solid fa-trash"></i> Delete Listing
-            </button>
-          </form>
+      <!-- Danger Zone Card -->
+      <div class="card border-0 shadow-lg" 
+           style="border-radius: 20px; background: linear-gradient(135deg, #ff6b6b15 0%, #ee575715 100%);">
+        <div class="card-body p-4 p-md-5">
+          <div class="d-flex align-items-start gap-3 mb-4">
+            <div class="p-3 bg-danger bg-opacity-10 rounded-circle">
+              <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 2rem;"></i>
+            </div>
+            <div>
+              <h4 class="text-danger fw-bold mb-2">Danger Zone</h4>
+              <p class="text-muted mb-0">
+                Permanently delete this listing. This action is irreversible and will remove all associated data including reviews.
+              </p>
+            </div>
+          </div>
+          
+          <button type="button" class="btn btn-danger btn-lg rounded-pill px-5 shadow-sm" 
+                  data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <i class="bi bi-trash3 me-2"></i>Delete Listing Permanently
+          </button>
         </div>
       </div>
 
@@ -217,29 +188,138 @@
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="deleteModalLabel">
-          <i class="fa-solid fa-triangle-exclamation"></i> Confirm Deletion
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      <div class="modal-header border-0 text-white p-4" 
+           style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5757 100%); border-radius: 20px 20px 0 0;">
+        <h5 class="modal-title fw-bold" id="deleteModalLabel">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>Confirm Deletion
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <p class="mb-3">Are you absolutely sure you want to delete this listing?</p>
-        <div class="alert alert-warning">
-          <strong><%= listing.title %></strong><br>
-          <small class="text-muted">This action cannot be undone!</small>
+      <div class="modal-body p-4">
+        <p class="fs-5 mb-3">Are you absolutely sure you want to delete this listing?</p>
+        <div class="alert alert-warning border-0 shadow-sm" style="border-radius: 12px;">
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-info-circle-fill fs-3"></i>
+            <div>
+              <strong class="d-block mb-1"><%= listing.title %></strong>
+              <small class="text-muted">⚠️ This action cannot be undone!</small>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          <i class="fa-solid fa-times"></i> Cancel
+      <div class="modal-footer border-0 p-4">
+        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">
+          <i class="bi bi-x-circle me-2"></i>Cancel
         </button>
-        <button type="button" class="btn btn-danger" id="confirmDelete">
-          <i class="fa-solid fa-trash"></i> Yes, Delete It
-        </button>
+        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
+          <button type="submit" class="btn btn-danger rounded-pill px-4">
+            <i class="bi bi-trash3 me-2"></i>Yes, Delete Forever
+          </button>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Custom Styles -->
+<style>
+  .form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+  }
+  
+  .card {
+    transition: transform 0.3s ease;
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+</style>
+
+<!-- Scripts -->
+<script>
+  // Bootstrap Validation
+  (function() {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(function(form) {
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+
+  // Character Counter for Description
+  const descInput = document.getElementById('description');
+  const charCount = document.getElementById('charCount');
+  
+  function updateCharCount() {
+    const count = descInput.value.length;
+    charCount.textContent = `${count} characters`;
+    charCount.className = count < 10 ? 'badge bg-danger' : 
+                          count < 50 ? 'badge bg-warning' : 'badge bg-success';
+  }
+  
+  descInput.addEventListener('input', updateCharCount);
+  updateCharCount();
+
+  // Price Formatter
+  const priceInput = document.getElementById('price');
+  const priceFormatted = document.getElementById('priceFormatted');
+  
+  function formatPrice() {
+    const value = parseFloat(priceInput.value);
+    if (!isNaN(value) && value >= 0) {
+      priceFormatted.textContent = value.toLocaleString('de-DE', { 
+        style: 'currency', 
+        currency: 'EUR' 
+      });
+      priceFormatted.style.display = 'inline-block';
+    } else {
+      priceFormatted.style.display = 'none';
+    }
+  }
+  
+  priceInput.addEventListener('input', formatPrice);
+  formatPrice();
+
+  // Image Preview with Loading State
+  const imageInput = document.getElementById('image');
+  const imagePreview = document.getElementById('imagePreview');
+  const imageError = document.getElementById('imageError');
+  const imageLoading = document.getElementById('imageLoading');
+  
+  function updateImagePreview() {
+    const url = imageInput.value.trim();
+    
+    if (!url) {
+      imagePreview.src = '<%= listing.image %>';
+      imageError.style.display = 'none';
+      return;
+    }
+    
+    imageLoading.style.display = 'block';
+    imageError.style.display = 'none';
+    
+    const img = new Image();
+    img.onload = function() {
+      imagePreview.src = url;
+      imageLoading.style.display = 'none';
+      imageError.style.display = 'none';
+    };
+    img.onerror = function() {
+      imageLoading.style.display = 'none';
+      imageError.style.display = 'block';
+    };
+    img.src = url;
+  }
+  
+  imageInput.addEventListener('input', updateImagePreview);
+</script>
