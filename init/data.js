@@ -1,9 +1,11 @@
-const sampleListing =
-[
+const sampleListing = [
   {
     "title": "Tesla Model 3",
     "description": "A sleek and efficient electric sedan with cutting-edge technology and autopilot features.",
-    "image": "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+    "image": {
+      "url": "https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+      "filename": "tesla-model3"
+    },
     "price": 45000,
     "location": "Dublin",
     "country": "Ireland"
@@ -11,7 +13,10 @@ const sampleListing =
   {
     "title": "BMW X5",
     "description": "Luxury SUV offering premium comfort, powerful performance, and advanced safety systems.",
-    "image": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+    "image": {
+      "url": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+      "filename": "bmw-x5"
+    },
     "price": 67000,
     "location": "Cork",
     "country": "Ireland"
@@ -19,7 +24,10 @@ const sampleListing =
   {
     "title": "Toyota Corolla",
     "description": "Reliable, fuel-efficient, and easy to maintain — perfect for daily commuting.",
-    "image": "https://images.unsplash.com/photo-1648542553187-ffc8a9380af4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=684",
+    "image": {
+      "url": "https://images.unsplash.com/photo-1648542553187-ffc8a9380af4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=684",
+      "filename": "toyota-corolla"
+    },
     "price": 22000,
     "location": "Galway",
     "country": "Ireland"
@@ -27,7 +35,10 @@ const sampleListing =
   {
     "title": "Audi A6",
     "description": "Executive sedan offering refined comfort, dynamic handling, and high-end interiors.",
-    "image": "https://images.unsplash.com/photo-1648542574207-e4625643adc1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1085",
+    "image": {
+      "url": "https://images.unsplash.com/photo-1648542574207-e4625643adc1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1085",
+      "filename": "audi-a6"
+    },
     "price": 58000,
     "location": "Limerick",
     "country": "Ireland"
@@ -35,11 +46,14 @@ const sampleListing =
   {
     "title": "Ford Mustang GT",
     "description": "An American muscle car known for its aggressive styling and roaring V8 performance.",
-    "image": "https://images.unsplash.com/photo-1643694985710-4e26a746734b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+    "image": {
+      "url": "https://images.unsplash.com/photo-1643694985710-4e26a746734b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+      "filename": "ford-mustang-gt"
+    },
     "price": 72000,
     "location": "Waterford",
     "country": "Ireland"
   }
 ];
 
-module.exports = {data: sampleListing}
+module.exports = { data: sampleListing };
