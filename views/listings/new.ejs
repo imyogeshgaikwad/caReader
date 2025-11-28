@@ -12,7 +12,7 @@
         </div>
 
         <div class="card-body">
-          <form method="POST" action="/listings" class="needs-validation" novalidate>
+          <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
             
             <!-- Title -->
             <div class="mb-3">
@@ -92,6 +92,47 @@
                 </span>
               </div>
             </div>
+
+
+            <!-- Image Upload -->
+
+             <!-- Image URL with Preview -->
+            <div class="mb-3">
+              <label for="image" class="form-label fw-bold">
+                Image URL
+              </label>
+              <input 
+                id="image" 
+                name="listing[image]" 
+                class="form-control" 
+                type="file" 
+                
+                required
+              >
+              <div class="form-text">
+                Optional - Leave blank for default image
+              </div>
+              <!-- Image Preview -->
+              <div class="mt-3" id="previewContainer" style="display: none;">
+                <label class="form-label fw-bold small text-muted">Preview:</label>
+                <img 
+                  id="imagePreview" 
+                  src="" 
+                  alt="Preview" 
+                  class="img-thumbnail d-block" 
+                  style="max-height: 200px; max-width: 100%;"
+                  
+                >
+                <span 
+                  id="imageError" 
+                  class="badge bg-danger mt-2" 
+                  style="display: none;"
+                >
+                  Invalid Image URL
+                </span>
+              </div>
+            </div>
+
 
             <!-- Price -->
             <div class="mb-3">
