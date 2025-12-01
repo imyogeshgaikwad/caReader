@@ -15,8 +15,8 @@ const listingSchema = new Schema({
     trim: true
   },
   image: {
-   url:String,
-   filename: String,
+    url: String,
+    filename: String,
   },
   price: {
     type: Number,
@@ -42,11 +42,29 @@ const listingSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    }
   }
 }, { timestamps: true });
 
-// Delete associated reviews when a listing is deleted
+
+// DELETE ASSOCIATED REVIEWS WHEN A LISTING IS DELETED
 listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
+  }
+});
+
+listingSchema.post("findByIdAndDelete", async (listing) => {
   if (listing) {
     await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
