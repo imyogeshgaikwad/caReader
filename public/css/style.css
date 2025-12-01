@@ -526,3 +526,31 @@ h1, h2, h3, h4 {
 }
 
 
+/* MAP */
+
+.map-wrapper {
+  transition: all 0.3s ease;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.map-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 15px 35px rgba(136, 0, 247, 0.4);
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 3px solid #C59BFF; /* pastel purple */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, var(--mint) 0%, var(--yellow) 100%);
+  transition: all 0.3s ease;
+}
+
+#map:hover {
+  border-color: #A678FF; /* slightly darker purple on hover */
+  box-shadow: 0 12px 30px rgba(197, 155, 255, 0.4);
+}
+

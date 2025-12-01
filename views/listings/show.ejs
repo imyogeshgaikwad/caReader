@@ -1,4 +1,7 @@
 <% layout("/layouts/boilerplate") %>
+<script>
+  const mapToken = "<%= process.env.MAP_TOKEN %> "
+</script>
 <div class="row container mt-4">
 
 <div class="container mt-4">
@@ -120,8 +123,24 @@
       </div>
     </div>
     <% } %>
-  </div>
+
+<h3 class="mt-3 mb-3 text-dark fw-bold">Where you will be</h3>
+
+<div class="map-wrapper mb-5">
+  <div id="map"></div>
 </div>
+
+    
+  </div>
+
+
+
+</div>
+
+
+
+
+
 
 <script>
   // Bootstrap form validation
@@ -146,3 +165,5 @@
     padding-bottom: 0 !important;
   }
 </style>
+
+<script src="/js/map.js"></script>
