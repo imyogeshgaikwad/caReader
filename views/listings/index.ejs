@@ -1,100 +1,210 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
+  /* FILTER SECTION */
   #filters {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0 1.5rem 0;
+  }
 
-  }
-  .filter{
-    text-align: center;
-    margin-right: 2rem;
-    margin-top: 2rem;
-    opacity: 0.7;
-  }
-  .filter:hover{
-    opacity: 1;
+  .filter {
+    width: 90px;
+    height: 80px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
     cursor: pointer;
-  }
-  .filter{
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     font-size: 0.8rem;
   }
+
+  .filter i {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+    color: #6a00d7;
+  }
+
+  .filter:hover {
+    background: #ebe2ff;
+    transform: translateY(-3px);
+  }
+
+  /* TAX TOGGLE */
+.tax-toggle {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: #ffffffcc;
+  border: 1px solid #d4c8ff;
+  border-radius: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  white-space: nowrap;    /* prevents wrapping */
+}
+
+.tax-toggle .form-check {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.tax-toggle label {
+  margin-left: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+}
+
+
+
+  /* CARDS */
+  .card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .tax-info {
+    display: none;
+    font-size: 0.85rem;
+    color: #b00000;
+  }
+
 </style>
 
+
+<!-- FILTERS SECTION -->
+
 <div id="filters">
-<div class="filter">
- <div><i class="fa-solid fa-fire"></i> </div>
- <p>Trending</p>
-</div><div class="filter">
- <div><i class="fa-solid fa-car"></i></div>
- <p>Model</p>
-</div>
-<div class="filter">
- <div><i class="fa-solid fa-comment"></i></i> </div>
- <p>Recommended</p>
-</div><div class="filter">
- <div><i class="fa-solid fa-euro-sign"></i></div>
- <p>Price</p>
-</div>
-<div class="filter">
- <div><i class="fa-solid fa-thumbs-up"></i> </div>
- <p>Most Valuable</p>
-</div><div class="filter">
- <div><i class="fa-solid fa-location-arrow"></i></div>
- <p>Location</p>
-</div>
-<div class="filter">
- <div><i class="fa-brands fa-teamspeak"></i></div>
- <p>Terms</p>
-</div><div class="filter">
- <div><i class="fa-solid fa-envelope"></i></div>
- <p>Gmail</p>
-</div>
-<div class="filter">
- <div><i class="fa-solid fa-address-book"></i></div>
- <p>Contact</p>
-</div>
- <div class="tax-toggle form-check-reverse">
-  <div class="form-check form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-  <label class="form-check-label" for="switchCheckDefault">Total after taxes  </label>
-</div>
- 
 
+  <div class="filter">
+    <i class="fa-solid fa-fire"></i>
+    <p>Trending</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-car"></i>
+    <p>Model</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-comment"></i>
+    <p>Recommended</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-euro-sign"></i>
+    <p>Price</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-thumbs-up"></i>
+    <p>Valuable</p>
+  </div>
+
+  <div class="filter">
+    <i class="fa-solid fa-location-arrow"></i>
+    <p>Location</p>
+  </div>
+
+
+
+  <!-- Tax Toggle -->
+<div class="tax-toggle">
+  <label for="taxSwitch"> After Tax </label>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="form-check form-switch m-0">
+    <input 
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      id="taxSwitch"
+      style="cursor:pointer;"
+    >
+  </div>
+</div>
 </div>
 
+
+
+
+<!-- ALL CARS SECTION -->
 <div class="container mt-4">
-  <h3 class="mb-4">All Cars</h3>
-  
+  <h3 class="mb-4 fw-bold">All Cars</h3>
+
   <div class="row">
     <% for (let listing of allListings) { %>
+
       <div class="col-md-4 mb-4">
         <div class="card h-100">
-          <img 
-            src="<%= listing.image.url %>" 
-            class="card-img-top" 
+
+          <img
+            src="<%= listing.image.url %>"
+            class="card-img-top"
             alt="<%= listing.title %>"
             style="height: 250px; object-fit: cover;"
           >
+
           <div class="card-body d-flex flex-column">
             <h5 class="card-title"><%= listing.title %></h5>
+
             <p class="card-text text-muted small">
               <%= listing.description.substring(0, 100) %>...
             </p>
+
             <div class="mt-auto">
               <p class="mb-1">
                 <strong>€<%= listing.price.toLocaleString() %></strong>
+                <span class="tax-info">&nbsp;+ 40% Tax</span>
               </p>
+
               <p class="text-muted small mb-3">
-                <i class="bi bi-geo-alt"></i> <%= listing.location %>, <%= listing.country %>
+                <i class="bi bi-geo-alt"></i>
+                <%= listing.location %>, <%= listing.country %>
               </p>
+
               <a href="/listings/<%= listing._id %>" class="btn btn-primary w-100">
                 View Details
               </a>
             </div>
+
           </div>
+
         </div>
       </div>
+
     <% } %>
   </div>
 </div>
+
+
+<script>
+  document.getElementById("taxSwitch").addEventListener("click", () => {
+    const items = document.querySelectorAll(".tax-info");
+    items.forEach(info => {
+      info.style.display = info.style.display === "inline" ? "none" : "inline";
+    });
+  });
+</script>
